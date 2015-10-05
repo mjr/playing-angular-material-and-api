@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>Flickr Search Angular Material</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body ng-app="flickrApp">
+    <div ng-controller="FlickrController" ng-cloak>
+        <md-content>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Settings">
+                        <ng-md-icon icon="menu" style="fill: #fff" size="24"></ng-md-icon>
+                    </md-button>
+                    <h2>
+                        <span>Search Photo in FlickrAPI</span>
+                    </h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Favorite">
+                        <ng-md-icon icon="star" style="fill: #f2ff2f" size="24"></ng-md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="More">
+                        <ng-md-icon icon="more_vert" style="fill: #fff" size="24"></ng-md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+        </md-content>
+        <md-content layout-padding>
+            <form name="searchFlickrForm" ng-submit="searchPhoto()">
+                <div ng-show="!isSearching">
+                    <md-input-container flex>
+                        <label>Search</label>
+                        <input ng-model="searchTerm">
+                    </md-input-container>
+                </div>
+                <md-progress-circular ng-if="isSearching" md-mode="indeterminate"></md-progress-circular>
+            </form>
+        </md-content>
+        <md-content class="md-padding">
+            <md-card ng-repeat="picture in results.photos.photo">
+                <img class="md-card-image" ng-src="https://farm{{picture.farm}}.staticflickr.com/{{picture.server}}/{{picture.id}}_{{picture.secret}}_b.jpg" alt=""/>
+                <md-card-content>
+                    <h2 class="md-title">{{picture.title}}</h2>
+                </md-card-content>
+                <div class="md-actions" layout="row" layout-align="end center">
+                    <md-button>Like</md-button>
+                    <md-button>Shared</md-button>
+                </div>
+            </md-card>
+        </md-content>
+    </div>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/hammerjs/hammer.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
